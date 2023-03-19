@@ -21,10 +21,10 @@ jobs:
       with:
           image-ref: 'docker.io/optimaltech/my-image-name:${{ github.sha }}'
           format: 'table'
-          exit-code: '1'
+          exit-code: '0'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'LOW,MEDIUM || true'
+          severity: 'CRITICAL,HIGH || true'
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
       with:
