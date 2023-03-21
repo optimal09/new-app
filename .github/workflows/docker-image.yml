@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag optimaltech/my-image-name:${{ github.sha }}
+      run: docker build . --file Dockerfile --tag optimaltech/my-image-name
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
@@ -31,4 +31,4 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Push the Docker image
-      run: docker push optimaltech/my-image-name:${{ github.sha }}
+      run: docker push optimaltech/my-image-name
