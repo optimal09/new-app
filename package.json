@@ -1,10 +1,20 @@
 {
-  "name": "my-app",
+  "name": "nodejs-hello-world",
   "version": "1.0.0",
-  "description": "A simple Node.js application that prints 'Hello, World!' to the console",
-  "main": "app.js",
+  "description": "Hello World sample app",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fhinkel/nodejs-hello-world.git"
+  },
+  "author": "fhinkel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fhinkel/nodejs-hello-world/issues"
+  },
+  "homepage": "https://github.com/fhinkel/nodejs-hello-world#readme"
 }
