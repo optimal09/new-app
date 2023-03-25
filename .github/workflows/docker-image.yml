@@ -32,3 +32,13 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Push the Docker image
       run: docker push optimaltech/my-image-name
+    - name: Configure Kubernetes CLI
+      uses: azure/k8s-set-context@v1
+      with:
+        kubeconfig: ${{ secrets.KUBECONFIG }}
+        context: ${{ secrets.KUBE_CONTEXT }}
+    - name: Deploy to Kubernetes
+      uses: appleboy/kubectl-action@master
+      with:
+        command: apply
+        args: -f app.yaml
