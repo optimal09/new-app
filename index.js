@@ -1,13 +1,14 @@
-var express = require('express');
+const http = require('http');
 
-// Constants
-var PORT = 2000;
+const hostname = '0.0.0.0';
+const port = process.env.PORT || 30001;
 
-// App
-var app = express();
-app.get('/', function (req, res){
-  res.send('Hello world, Node.js app running on Docker');
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello World\n');
 });
 
-app.listen(PORT);
-console.log('Running on http://localhost:' + PORT);
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
