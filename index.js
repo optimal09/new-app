@@ -1,13 +1,13 @@
-var http = require('http');
+var express = require('express');
 
-var server = http.createServer(function(request, response) {
+// Constants
+var PORT = 2000;
 
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Hello World!");
-
+// App
+var app = express();
+app.get('/', function (req, res){
+  res.send('Hello world, Node.js app running on Docker');
 });
 
-var port = 80;
-server.listen(port);
-
-console.log("Server running at http://localhost:%d", port);
+app.listen(PORT);
+console.log('Running on http://localhost:' + PORT);
