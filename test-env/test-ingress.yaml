@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  namespace: test
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: test.optimalgtech.co.uk
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test-nodejs-svc
+            port:
+              number: 80
