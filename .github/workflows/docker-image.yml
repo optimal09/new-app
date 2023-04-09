@@ -46,18 +46,15 @@ jobs:
         context: optimalgtech.co.uk
         method: kubeconfig
 
-    - name: Deploy to all namespaces
-      run: |
-        namespaces=$(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}')
+    - name: Deploy to test namespace
+      if: github.ref == 'refs/heads/main'
+      run: kubectl apply -f test-env/ --namespace=test
 
-        for namespace in $namespaces; do
-        kubectl apply -f prod-env/ --namespace=prod
-        done
-        
-        for namespace in $namespaces; do
-        kubectl apply -f test-env/ --namespace=test
-        done
-        
-        for namespace in $namespaces; do
-        kubectl apply -f uat-env/ --namespace=uat
-        done
+    - name: Deploy to uat namespace
+      if: github.ref == 'refs/heads/master' && github.event.pull_request.head.repo.full_name == github.repository && github.event.action != 'closed'
+      run: kubectl apply -f uat-env/ --namespace=uat
+
+    - name: Deploy to prod namespace
+      if: github.ref == 'refs/heads/master' && github.event.pull_request.head.repo.full_name == github.repository && github.event.action == 'closed' && github.event.pull_request.merged == true
+      run: kubectl apply -f prod-env/ --namespace=prod
+      run: kubectl apply -f <prod manifests directory> --namespace=prod
