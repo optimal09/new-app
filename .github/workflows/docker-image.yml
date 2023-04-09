@@ -39,8 +39,10 @@ jobs:
         context: optimalgtech.co.uk
         method: kubeconfig
 
-    - name: Deploy to Kubernetes
-      uses: optimal09/new-app@main
-      with:
-        command: apply
-        args: -f app.yaml
+    - name: Deploy to all namespaces
+      run: |
+        namespaces=$(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}')
+
+        for namespace in $namespaces; do
+        kubectl apply -f prod-env/ -f uat-env/ -f test-env/ --namespace=$namespace
+        done
