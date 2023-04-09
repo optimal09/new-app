@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World and welcome to wsd\n');
+  res.end('HELLO WORLD AND WELCOME TO WSD\n');
 });
 
 server.listen(port, hostname, () => {
