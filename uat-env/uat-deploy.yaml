@@ -16,6 +16,7 @@ spec:
       containers:
         - name: uat-nodejs-app
           image: optimaltech/my-image-name
+          imagePullPolicy: Always
           env:
             - name: NODE_ENV
               value: production
