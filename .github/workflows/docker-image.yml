@@ -36,7 +36,7 @@ jobs:
       uses: azure/k8s-set-context@v1
       with:
         kubeconfig: ${{ secrets.KUBECONFIG }}
-        context: optimalgtech.co.uk
+        context: optimal
         method: kubeconfig
 
     - name: Deploy to Kubernetes
