@@ -48,13 +48,13 @@ jobs:
 
     - name: Deploy to test namespace
       if: github.ref == 'refs/heads/main'
-      run: kubectl apply -f test-env/ --namespace=test --image=optimaltech/my-image-name
+      run: kubectl apply -f test-env/ --namespace=test 
 
     - name: Deploy to uat namespace
       if: github.ref == 'refs/heads/master' && github.event.pull_request.head.repo.full_name == github.repository && github.event.action != 'closed'
-      run: kubectl apply -f uat-env/ --namespace=uat --image=optimaltech/my-image-name
+      run: kubectl apply -f uat-env/ --namespace=uat 
 
     - name: Deploy to prod namespace
       if: github.ref == 'refs/heads/master' && github.event.pull_request.head.repo.full_name == github.repository && github.event.action == 'closed' && github.event.pull_request.merged == true
-      run: kubectl apply -f prod-env/ --namespace=prod --image=optimaltech/my-image-name
+      run: kubectl apply -f prod-env/ --namespace=prod 
 
