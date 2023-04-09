@@ -57,4 +57,3 @@ jobs:
     - name: Deploy to prod namespace
       if: github.ref == 'refs/heads/master' && github.event.pull_request.head.repo.full_name == github.repository && github.event.action == 'closed' && github.event.pull_request.merged == true
       run: kubectl apply -f prod-env/ --namespace=prod
-      run: kubectl apply -f <prod manifests directory> --namespace=prod
