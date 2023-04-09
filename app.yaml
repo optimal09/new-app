@@ -17,6 +17,7 @@ spec:
       containers:
         - name: node-app
           image: optimaltech/my-image-name
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
               name: http
