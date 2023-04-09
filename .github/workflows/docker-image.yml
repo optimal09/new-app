@@ -44,5 +44,13 @@ jobs:
         namespaces=$(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}')
 
         for namespace in $namespaces; do
-        kubectl apply -f prod-env/ -f uat-env/ -f test-env/ --namespace=$namespace
+        kubectl apply -f prod-env/ --namespace=prod
+        done
+        
+        for namespace in $namespaces; do
+        kubectl apply -f test-env/ --namespace=test
+        done
+        
+        for namespace in $namespaces; do
+        kubectl apply -f uat-env/ --namespace=uat
         done
