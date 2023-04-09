@@ -2,9 +2,16 @@ name: Docker Image CI & Push to DockerHub
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - '**' # Deploy to test namespace on every push to the main branch
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - master
+    paths:
+      - '**' # Deploy to uat and prod namespaces on every pull request to the master branch
+
 
 jobs:
 
