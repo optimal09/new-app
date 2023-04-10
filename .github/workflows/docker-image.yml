@@ -41,19 +41,23 @@ jobs:
       run: docker push optimaltech/my-image-name
     - name: Pull the Docker image from DockerHub
       run: docker pull optimaltech/my-image-name
+    - name: Create output directory and save the image to a file
+      run: |
+        mkdir output
+        docker save optimaltech/my-image-name -v > output/image.tar
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+    - name: Load the Docker image into Kubernetes
+      run: kind load docker-image --name optimalgtech.co.uk output/image.tar
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
     - name: Configure Kubernetes CLI
       uses: azure/k8s-set-context@v1
       with:
         kubeconfig: ${{ secrets.KUBECONFIG }}
         context: optimalgtech.co.uk
         method: kubeconfig
-
-    - name: Load the Docker image into Kubernetes
-      run: |
-        docker save optimaltech/my-image-name -v > image.tar
-        kind load docker-image --name optimalgtech.co.uk image.tar
-      env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
     - name: Deploy to test namespace
       if: github.ref == 'refs/heads/main'
