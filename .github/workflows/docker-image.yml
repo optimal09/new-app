@@ -43,7 +43,7 @@ jobs:
       uses: azure/k8s-set-context@v1
       with:
         kubeconfig: ${{ secrets.KUBECONFIG }}
-        context: service-account-context
+        context: optimalgtech.co.uk
         method: kubeconfig
 
     - name: Deploy to test namespace
