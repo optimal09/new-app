@@ -48,7 +48,7 @@ jobs:
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
     - name: Load the Docker image into Kubernetes
-      run: kind load docker-image --name optimalgtech.co.uk output/image.tar
+      run: kind load docker-image --name optimalgtech.co.uk new-app/output/image.tar
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
