@@ -39,12 +39,21 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Push the Docker image
       run: docker push optimaltech/my-image-name
+    - name: Pull the Docker image from DockerHub
+      run: docker pull optimaltech/my-image-name
     - name: Configure Kubernetes CLI
       uses: azure/k8s-set-context@v1
       with:
         kubeconfig: ${{ secrets.KUBECONFIG }}
         context: optimalgtech.co.uk
         method: kubeconfig
+
+    - name: Load the Docker image into Kubernetes
+      run: |
+        docker save optimaltech/my-image-name > image.tar
+        kind load docker-image --name my-cluster image.tar
+      env:
+        KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
     - name: Deploy to test namespace
       if: github.ref == 'refs/heads/main'
@@ -57,4 +66,3 @@ jobs:
     - name: Deploy to prod namespace
       if: github.ref == 'refs/heads/master' && github.event.pull_request.head.repo.full_name == github.repository && github.event.action == 'closed' && github.event.pull_request.merged == true
       run: kubectl apply -f prod-env/ --namespace=prod 
-
