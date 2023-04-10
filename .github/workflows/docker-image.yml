@@ -43,8 +43,8 @@ jobs:
       run: docker pull optimaltech/my-image-name
     - name: Create output directory and save the image to a file
       run: |
-        mkdir output
-        docker save optimaltech/my-image-name > output/image.tar
+        mkdir -p output
+        docker save ***/my-image-name > output/image.tar -f
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
     - name: Load the Docker image into Kubernetes
