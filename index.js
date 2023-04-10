@@ -5,8 +5,10 @@ const port = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('HELLO WORLD AND WELCOME TO WSD. TODAY IS A VERY GOOD DAY FOR US ALL. THANK YOU\n');
+  res.setHeader('Content-Type', 'text/html');
+  res.write('<h1>HELLO WORLD AND WELCOME TO WSD.</h1>');
+  res.write('<p>TODAY IS A VERY GOOD DAY FOR US ALL. THANK YOU</p>');
+  res.end();
 });
 
 server.listen(port, hostname, () => {
