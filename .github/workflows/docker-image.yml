@@ -45,6 +45,7 @@ jobs:
       run: |
         mkdir -p output
         docker save optimaltech/my-image-name > output/image.tar
+        ls -lh
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
     - name: Load the Docker image into Kubernetes
