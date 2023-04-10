@@ -50,7 +50,7 @@ jobs:
 
     - name: Load the Docker image into Kubernetes
       run: |
-        docker save optimaltech/my-image-name > image.tar
+        docker save optimaltech/my-image-name -v > image.tar
         kind load docker-image --name optimalgtech.co.uk image.tar
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
